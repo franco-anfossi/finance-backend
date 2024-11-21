@@ -17,6 +17,7 @@ help:
 	@echo "  make lint             - Ejecuta Ruff para revisar el código"
 	@echo "  make format           - Formatea el código con Ruff"
 	@echo "  make run-dev          - Ejecuta la aplicación en modo desarrollo"
+	@echo "  make db-create        - Crea la base de datos"
 	@echo "  make db-migrate       - Crea una nueva migración con Alembic (usa msg='mensaje')"
 	@echo "  make db-upgrade       - Aplica las migraciones a la base de datos"
 	@echo "  make db-rollback      - Revertir la última migración (usa steps=N)"
@@ -50,7 +51,12 @@ format:
 run-dev:
 	$(PYTHON) fastapi dev src/main.py
 
-#Crear una nueva migración con Alembic
+# Crear Base de datos
+db-create:
+	@echo "Creating database $(DB_NAME)..."
+	createdb -h $(DB_HOST) -U $(DB_USER) $(DB_NAME)
+
+# Crear una nueva migración con Alembic
 # Utiliza: make db-migrate msg="mensaje de la migración"
 db-migrate:
 	@if [ -z "$(msg)" ]; then echo "Error: Debes especificar un mensaje con msg='mensaje de la migración'"; exit 1; fi

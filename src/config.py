@@ -18,6 +18,11 @@ class Settings(BaseSettings):
     # Configuración de la base de datos
     DATABASE_URL: str
 
+    SECRET_KEY: str
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int
+    ENCRYPTION_KEY: str
+
     # Configuración de CORS
     ALLOWED_ORIGINS: str = [
         "*",

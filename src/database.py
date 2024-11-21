@@ -8,6 +8,9 @@ DATABASE_URL = settings.DATABASE_URL
 engine = create_async_engine(DATABASE_URL, echo=True)
 Base = declarative_base()
 
+from .user.models import User  # noqa
+from .bank.models import Bank  # noqa
+
 async_session = sessionmaker(
     autocommit=False, autoflush=False, bind=engine, class_=AsyncSession
 )

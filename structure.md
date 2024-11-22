@@ -22,6 +22,9 @@ finance-backend/
 │   ├── middleware/
 │   │   ├── __init__.py
 │   │   └── cors.py
+│   ├── scraper/
+│   │   ├── base_scraper.py
+│   │   └── santander_scraper.py
 │   ├── transaction/
 │   │   ├── enums.py
 │   │   ├── models.py

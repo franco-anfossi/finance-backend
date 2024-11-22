@@ -18,6 +18,8 @@ requests = "^2.32.3"
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 psycopg2-binary = "^2.9.10"
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+selenium = "^4.26.1"
+webdriver-manager = "^4.0.2"
 
 
 [tool.poetry.group.dev.dependencies]

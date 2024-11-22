@@ -6,25 +6,25 @@ DB_USER := $(shell echo $(DATABASE_URL) | sed -E 's/.*\/\/([^:]*):.*/\1/')
 DB_HOST := $(shell echo $(DATABASE_URL) | sed -E 's/.*@([^:]*):.*/\1/')
 
 # Comandos generales
-.PHONY: help install install-prod test lint format run-dev db-migrate db-upgrade db-rollback db-rollback-to db-rollback-base update-deps structure db-reset
+.PHONY: help install install-prod update-deps test lint format run-dev structure db-create db-migrate db-upgrade db-rollback db-rollback-to db-rollback-base db-reset
 
 # Ayuda: Muestra todos los comandos disponibles
 help:
 	@echo "Comandos disponibles:"
 	@echo "  make install          - Instala todas las dependencias del proyecto"
 	@echo "  make install-prod     - Instala solo las dependencias de producción"
+	@echo "  make update-deps      - Actualiza las dependencias del proyecto"
 	@echo "  make test             - Ejecuta las pruebas"
 	@echo "  make lint             - Ejecuta Ruff para revisar el código"
 	@echo "  make format           - Formatea el código con Ruff"
 	@echo "  make run-dev          - Ejecuta la aplicación en modo desarrollo"
+	@echo "  make structure        - Genera la estructura de la API"
 	@echo "  make db-create        - Crea la base de datos"
 	@echo "  make db-migrate       - Crea una nueva migración con Alembic (usa msg='mensaje')"
 	@echo "  make db-upgrade       - Aplica las migraciones a la base de datos"
 	@echo "  make db-rollback      - Revertir la última migración (usa steps=N)"
 	@echo "  make db-rollback-to   - Revertir hasta una versión específica (usa version='id')"
 	@echo "  make db-rollback-base - Revertir hasta la migración base"
-	@echo "  make update-deps      - Actualiza las dependencias del proyecto"
-	@echo "  make structure        - Genera la estructura de la API"
 	@echo "  make db-reset         - Resetea la base de datos"
 
 # Instalar todas las dependencias
@@ -34,6 +34,10 @@ install:
 # Instalar solo las dependencias de producción
 install-prod:
 	poetry install --no-dev
+
+# Actualizar dependencias
+update-deps:
+	poetry update
 
 # Ejecutar las pruebas con pytest
 test:
@@ -50,6 +54,10 @@ format:
 # Ejecutar la aplicación con base de fastapi
 run-dev:
 	$(PYTHON) fastapi dev src/main.py
+
+# generar estructura de la api
+structure:
+	$(PYTHON) python generate_structure.py
 
 # Crear Base de datos
 db-create:
@@ -80,14 +88,6 @@ db-rollback-to:
 
 db-rollback-base:
 	$(PYTHON) alembic downgrade base
-
-# Actualizar dependencias
-update-deps:
-	poetry update
-
-# generar estructura de la api
-structure:
-	$(PYTHON) python generate_structure.py
 
 # Generar reseteo BD
 db-reset:

@@ -39,5 +39,5 @@ if __name__ == "__main__":
     generate_structure(
         ".",
         "structure.md",
-        exclude_dirs=[".git", "__pycache__", "venv", ".ruff_cache"],
+        exclude_dirs=[".git", "__pycache__", "venv", ".ruff_cache", ".pytest_cache"],
     )

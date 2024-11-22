@@ -22,3 +22,4 @@ class Bank(Base):
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
 
     user = relationship("User", back_populates="banks")
+    transactions = relationship("Transaction", back_populates="bank")

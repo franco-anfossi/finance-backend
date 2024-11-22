@@ -16,3 +16,4 @@ class User(Base):
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
 
     banks = relationship("Bank", back_populates="user")
+    transactions = relationship("Transaction", back_populates="user")

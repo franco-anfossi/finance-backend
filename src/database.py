@@ -8,6 +8,7 @@ DATABASE_URL = settings.DATABASE_URL
 engine = create_async_engine(DATABASE_URL, echo=True)
 Base = declarative_base()
 
+from .category.models import Category  # noqa
 from .bank.models import Bank  # noqa
 from .transaction.models import Transaction  # noqa
 from .user.models import User  # noqa

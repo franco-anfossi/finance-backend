@@ -17,3 +17,4 @@ class User(Base):
 
     banks = relationship("Bank", back_populates="user")
     transactions = relationship("Transaction", back_populates="user")
+    categories = relationship("Category", back_populates="user")
